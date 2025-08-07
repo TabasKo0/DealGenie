@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-
+import CartPage from '../cart/page.js';
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [transactions, setTransactions] = useState([]);
@@ -50,6 +50,7 @@ const ProfilePage = () => {
                 <div><span>&nbsp;Username:</span><span> {user.username}</span></div>
                 <div><span>&nbsp;Balance:</span><span> Rs {user.balance}</span></div>
             </div>
+            <CartPage />
             <button onClick={async () => {
                
                 document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';

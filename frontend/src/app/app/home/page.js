@@ -21,7 +21,9 @@ useEffect(() => {
           menuName: item.type, // like "phone", "laptop", etc.
           eventName: item.product_name,
           link: '/product/' + item.id, // or another route format
-          url: item.img_url || '/placeholder.jpg', // assuming you add image URLs
+          url: item.img_url || '/placeholder.jpg', // assuming you add image URLs,
+          price: item.our_price || 'N/A' // assuming you have a price field
+
         }));
         setCasinoLobby(formatted);
       } else {
@@ -91,8 +93,10 @@ useEffect(() => {
           <tr>
             {filteredData.map((item, index) => (
               <td key={index} className='c46'>
-                <span>{item.eventName}</span>
-                <span className='date'>{new Date(item.eventTime).toLocaleString()}</span>
+                <div className="p-2">
+  <span>{item.eventName}</span>
+ 
+</div>                <span className='date'>{new Date(item.eventTime).toLocaleString()}</span>
               </td>
             ))}
           </tr>
@@ -106,8 +110,12 @@ useEffect(() => {
         <div className='tiles'>
           {casinoLobby.filter(item => item.menuName.toLowerCase() === 'phone').map((item, index) => (
             <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-             <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-            </div>
+             <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> 
+             <div className="p-2">
+  <span>{item.eventName}</span>
+  {console.log(item)}
+  <div>₹{item.price}</div>
+</div>           </div>
           ))}
         </div>
           </div>
@@ -118,9 +126,14 @@ useEffect(() => {
         <div className='highlights'>Headphones</div>
         <div className='tiles'>
           {casinoLobby.filter(item => item.menuName.toLowerCase() === 'headphones').map((item, index) => (
-            <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/> <span>{item.eventName}</span>
-           </div>
+            <><div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/> 
+            <div className="p-2">
+  <span>{item.eventName}</span>
+  <br></br>
+ 
+</div>          </div>
+ </>
           ))}
         </div>
           </div>
@@ -131,8 +144,10 @@ useEffect(() => {
         <div className='tiles'>
           {casinoLobby.filter(item => item.menuName.toLowerCase() === 'laptop').map((item, index) => (
             <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-           </div>
+            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <div className="p-2">
+  <span>{item.eventName}</span>
+ 
+</div>           </div>
           ))}
         </div>
           </div>
@@ -143,8 +158,10 @@ useEffect(() => {
         <div className='tiles'>
           {casinoLobby.filter(item => item.menuName.toLowerCase() === 'speakers').map((item, index) => (
             <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-           </div>
+            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <div className="p-2">
+  <span>{item.eventName}</span>
+ 
+</div>           </div>
           ))}
         </div>
           </div>
@@ -155,8 +172,10 @@ useEffect(() => {
         <div className='tiles'>
           {casinoLobby.filter(item => item.menuName.toLowerCase() === 'smart watches').map((item, index) => (
             <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-           </div>
+            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <div className="p-2">
+  <span>{item.eventName}</span>
+ 
+</div>           </div>
           ))}
         </div>
           </div>
