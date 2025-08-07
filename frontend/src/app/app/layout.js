@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import "./../globals.css";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -34,7 +35,14 @@ export default function RootLayout({ children }) {
     return (
         <div style={{ padding: '20px' }}>
             <header style={{ fontWeight:"bold",display: 'flex', marginBottom: '20px' }}>
-                <img className="logo" src="/logo.png" alt="DealGenie Logo" style={{ borderRadius:'1vh', marginRight: '10px' }} />
+                <Image 
+                    className="logo" 
+                    src="/logo.png" 
+                    alt="DealGenie Logo" 
+                    width={60} 
+                    height={40}
+                    style={{ borderRadius:'1vh', marginRight: '10px' }} 
+                />
                 <button style={{borderRadius:'0.5vh'}} className="hamburger-menu" onClick={toggleMenu}>
                     <span className="hamburger-icon"></span>
                 </button>

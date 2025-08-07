@@ -1,5 +1,6 @@
-'use client'
+'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const ProfilePage = () => {
@@ -44,7 +45,14 @@ const ProfilePage = () => {
             <h1 className="highlights" style={{color: 'white'}}> Profile Page</h1>
             
           <br></br>
-            <img src="/profile.jpg" alt="Banner" className='banner' />
+            <Image 
+                src="/profile.jpg" 
+                alt="User profile banner" 
+                className='banner' 
+                width={1200}
+                height={300}
+                style={{ width: '100%', height: 'auto' }}
+            />
             <div style={{color: 'black',fontSize: 'X-large'}}>      
                 
                 <div><span>&nbsp;Username:</span><span> {user.username}</span></div>

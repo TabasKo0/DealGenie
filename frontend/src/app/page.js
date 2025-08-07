@@ -101,9 +101,11 @@ export default function Home() {
               background: 'rgba(255, 255, 255, 0.1)', 
               backdropFilter: 'blur(10px)' 
             }}>
-        <img
+        <Image
           src="/logo.png"
           alt="DealGenie Logo"
+          width={450}
+          height={300}
           style={{ 
             width: '45vh', 
             height: 'auto', 
@@ -111,7 +113,7 @@ export default function Home() {
             display: 'block', 
             margin: '0 auto' 
           }}
-          priority="true"
+          priority
         />
 
         <div className="flex flex-col items-center justify-center w-full">
