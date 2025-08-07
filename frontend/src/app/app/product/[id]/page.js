@@ -1,11 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 
 export default function Page() {
-  const { id } = useParams()
-  const [product, setProduct] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const { id } = useParams();
+  const searchParams = useSearchParams();
+  const imgUrl = searchParams.get('img');
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -26,23 +28,89 @@ export default function Page() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div style={{ color: 'black' }}>Loading...</div>;
   if (!product) return <div>Product not found.</div>;
 
-  // Show product name and link if available
+  // Defensive: ensure specifications is always an array
+  const specifications = Array.isArray(product?.specifications) ? product.specifications : [];
+
   return (
-    <div>
-      <h2>{product.name || 'Product Details'}</h2>
-      {product.url && (
-        <a href={product.url} target="_blank" rel="noopener noreferrer">View Product</a>
-      )}
-      <ul>
-        {Array.isArray(product.specifications) && product.specifications.map((item, idx) => (
-          <li key={idx}>
-            <strong>{item.label}:</strong> {Array.isArray(item.value) ? item.value.join(', ') : String(item.value)}
-          </li>
-        ))}
-      </ul>
+    <div style={{ color: 'black', padding: '2rem', background: '#fafafa', borderRadius: 16, boxShadow: '0 2px 8px #eee' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '2rem' }}>
+        {imgUrl && (
+          <div style={{ flex: '0 0 auto', marginRight: '2rem', textAlign: 'center', position: 'relative', height: '300px' }}>
+            <img
+              src={imgUrl}
+              height="300"
+              width="300"
+              alt={product?.name || 'Product Image'}
+              style={{ maxWidth: '300px', borderRadius: '12px', boxShadow: '0 1px 6px #ddd', verticalAlign: 'top' }}
+            />
+          </div>
+        )}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '300px', justifyContent: 'space-between' }}>
+          <h1 style={{ fontSize: '2em', fontWeight: 700, marginBottom: '1.5rem', marginTop: 0 }}>
+            {product?.name || 'Product Details'}
+          </h1>
+          <div style={{ display: 'flex', gap: '1rem', alignSelf: 'flex-end' }}>
+            <button
+              style={{
+                padding: '0.75em 2em',
+                background: '#1976d2',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontSize: '1em',
+                boxShadow: '0 1px 4px #ddd'
+              }}
+            >
+              Add to Cart
+            </button>
+            <button
+              style={{
+                padding: '0.75em 2em',
+                background: '#43a047',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontSize: '1em',
+                boxShadow: '0 1px 4px #ddd'
+              }}
+            >
+              Buy
+            </button>
+          </div>
+        </div>
+      </div>
+      <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', borderRadius: 8, overflow: 'hidden' }}>
+        <tbody>
+          {specifications.map((item, idx) => (
+            <tr key={idx} style={{ borderBottom: '1px solid #eee' }}>
+              <td style={{ fontWeight: 500, padding: '0.75em 1em', verticalAlign: 'top', width: '30%' }}>{item.label}</td>
+              <td style={{ padding: '0.75em 1em', verticalAlign: 'top' }}>
+                {Array.isArray(item.value) ? item.value.join(', ') : String(item.value)}
+                {item.url && typeof item.url === 'string' && item.url.match(/^https?:\/\//) && (
+                  <div style={{ marginTop: '0.5em' }}>
+                    <img src={item.url} alt={item.label} style={{ maxWidth: '120px', borderRadius: 6, boxShadow: '0 1px 4px #eee' }} />
+                    <div style={{ wordBreak: 'break-all', fontSize: '0.85em', color: '#888' }}>{item.url}</div>
+                  </div>
+                )}
+                {item.link && typeof item.link === 'string' && item.link.match(/^https?:\/\//) && (
+                  <div style={{ marginTop: '0.5em' }}>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: '#1976d2', textDecoration: 'underline', fontSize: '0.95em' }}>
+                      {item.link}
+                    </a>
+                  </div>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -44,12 +44,12 @@ useEffect(() => {
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
-    const handleLinkClick = (href) => {
-      setActiveLink('/app/'+href);
-      setTimeout(() => {setActiveLink('');}, 100);
-      
-      router.push('/app/'+href);
-  };
+    const handleLinkClick = (href, imgUrl) => {
+      setActiveLink('/app/' + href);
+      setTimeout(() => { setActiveLink(''); }, 100);
+      // Pass img url as query param using string URL
+      router.push(`/app/${href}?img=${encodeURIComponent(imgUrl)}`);
+    };
 
     useEffect(() => {
         fetch('https://www.55sport.in/api/exchange/events/searchEventList?key', {
@@ -77,92 +77,90 @@ useEffect(() => {
 
     return (
       <div>
-                                    <img src="/banner.jpg" className='banner' alt="Banner"  />
+      <img src="/banner.jpg" className='banner' alt="Banner"  />
 
       <div className='hidden'>
         <br></br>
         <div className='p-1 submenu'>
-          <span onClick={() => filterData('Cricket')} className={selectedSport === 'Cricket' ? 'active' : ''}>Cricket</span>
-          <span onClick={() => filterData('Soccer')} className={selectedSport === 'Soccer' ? 'active' : ''}>Soccer</span>
-          <span onClick={() => filterData('Tennis')} className={selectedSport === 'Tennis' ? 'active' : ''}>Tennis</span>
+        <span onClick={() => filterData('Cricket')} className={selectedSport === 'Cricket' ? 'active' : ''}>Cricket</span>
+        <span onClick={() => filterData('Soccer')} className={selectedSport === 'Soccer' ? 'active' : ''}>Soccer</span>
+        <span onClick={() => filterData('Tennis')} className={selectedSport === 'Tennis' ? 'active' : ''}>Tennis</span>
         </div>
         <table className='bgs'>
-          <tbody>
-          <tr>
-            {filteredData.map((item, index) => (
-              <td key={index} className='c46'>
-                <span>{item.eventName}</span>
-                <span className='date'>{new Date(item.eventTime).toLocaleString()}</span>
-              </td>
-            ))}
-          </tr>
-          </tbody>
+        <tbody>
+        <tr>
+          {filteredData.map((item, index) => (
+          <td key={index} className='c46'>
+            <span>{item.eventName}</span>
+            <span className='date'>{new Date(item.eventTime).toLocaleString()}</span>
+          </td>
+          ))}
+        </tr>
+        </tbody>
         </table>
-        
       </div>
-        <br></br>
-        <div className='casinos'>
+      <br></br>
+      <div className='casinos'>
         <div className='highlights'>Phones</div>
         <div className='tiles'>
-          {casinoLobby.filter(item => item.menuName.toLowerCase() === 'phone').map((item, index) => (
-            <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-             <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-            </div>
-          ))}
-        </div>
+        {casinoLobby.filter(item => item.menuName.toLowerCase() === 'phone').map((item, index) => (
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
           </div>
-          <br>
-          </br>
-          <br></br>
-          <div className='casinos'>
+        ))}
+        </div>
+      </div>
+      <br></br>
+      <br></br>
+      <div className='casinos'>
         <div className='highlights'>Headphones</div>
         <div className='tiles'>
-          {casinoLobby.filter(item => item.menuName.toLowerCase() === 'headphones').map((item, index) => (
-            <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/> <span>{item.eventName}</span>
-           </div>
-          ))}
-        </div>
+        {casinoLobby.filter(item => item.menuName.toLowerCase() === 'headphones').map((item, index) => (
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/> <span>{item.eventName}</span>
           </div>
-          <br></br>
-          <br></br>
-          <div className='casinos'>
+        ))}
+        </div>
+      </div>
+      <br></br>
+      <br></br>
+      <div className='casinos'>
         <div className='highlights'>Laptops</div>
         <div className='tiles'>
-          {casinoLobby.filter(item => item.menuName.toLowerCase() === 'laptop').map((item, index) => (
-            <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-           </div>
-          ))}
-        </div>
+        {casinoLobby.filter(item => item.menuName.toLowerCase() === 'laptop').map((item, index) => (
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
           </div>
-          <br></br>
-          <br></br>
-          <div className='casinos'>
+        ))}
+        </div>
+      </div>
+      <br></br>
+      <br></br>
+      <div className='casinos'>
         <div className='highlights'>Speakers</div>
         <div className='tiles'>
-          {casinoLobby.filter(item => item.menuName.toLowerCase() === 'speakers').map((item, index) => (
-            <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-           </div>
-          ))}
-        </div>
+        {casinoLobby.filter(item => item.menuName.toLowerCase() === 'speakers').map((item, index) => (
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
           </div>
-          <br></br>
-          <br></br>
-          <div className='casinos'>
+        ))}
+        </div>
+      </div>
+      <br></br>
+      <br></br>
+      <div className='casinos'>
         <div className='highlights'>Smart Watches</div>
         <div className='tiles'>
-          {casinoLobby.filter(item => item.menuName.toLowerCase() === 'smart watches').map((item, index) => (
-            <div  key={index} onClick={() => handleLinkClick(item.link)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-            <img  src= {item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
-           </div>
-          ))}
-        </div>
+        {casinoLobby.filter(item => item.menuName.toLowerCase() === 'smart watches').map((item, index) => (
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
           </div>
-          <br></br>
-          <br></br>
-       </div>
+        ))}
+        </div>
+      </div>
+      <br></br>
+      <br></br>
+      </div>
     );
 };
 
