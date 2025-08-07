@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
 import Image from "next/image";
-import { toast,Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 import Orb from './Orb/orb.js';
-
 
 export default function Home() {
   const [username, setUsername] = useState('');
@@ -12,43 +11,68 @@ export default function Home() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    toast.loading('Waiting...');
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username:username, password: password }),
-    });
-
-    const data = await res.json();
-    toast.dismiss()
-    console.log(data)
-    try{
-      data=='User Created' ? toast.success('User created successfully') : toast.error('User Exists');
+    
+    if (!username || !password) {
+      toast.error('Please fill in all fields');
+      return;
     }
-    catch(e){toast.error(e)}
-  };
 
+    toast.loading('Creating account...');
+    
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+      toast.dismiss();
+      
+      if (data === 'User Created') {
+        toast.success('User created successfully');
+      } else {
+        toast.error('User already exists');
+      }
+    } catch (error) {
+      toast.dismiss();
+      toast.error('Failed to create account');
+      console.error('Signup error:', error);
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    toast.loading('Waiting...');
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username:username, password: password }),
-    });
-
     
-
-    const data = await res.json();
-    toast.dismiss()
-    if (data.message=='Login successful'){
-      toast.success('Login successful');
-      window.location.href = '/app/home'
+    if (!username || !password) {
+      toast.error('Please fill in all fields');
+      return;
     }
-    else{
-      toast.error(data.message);
-  };}
+
+    toast.loading('Logging in...');
+    
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+      toast.dismiss();
+      
+      if (data.message === 'Login successful') {
+        toast.success('Login successful');
+        window.location.href = '/app/home';
+      } else {
+        toast.error(data.message || 'Login failed');
+      }
+    } catch (error) {
+      toast.dismiss();
+      toast.error('Failed to login');
+      console.error('Login error:', error);
+    }
+  };
 
   return (
     <div
@@ -64,48 +88,68 @@ export default function Home() {
         />
       </div>
 
-      <main className="flex flex-col gap-8 items-center justify-center" style={{ zIndex: 1, position: 'relative', borderRadius: '50%', height: '80vh', width: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center',background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)' }}>
+      <main className="flex flex-col gap-8 items-center justify-center" 
+            style={{ 
+              zIndex: 1, 
+              position: 'relative', 
+              borderRadius: '50%', 
+              height: '80vh', 
+              width: '80vh', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              background: 'rgba(255, 255, 255, 0.1)', 
+              backdropFilter: 'blur(10px)' 
+            }}>
         <img
           src="/logo.png"
-          alt="Next.js logo"
-          style={{ width: '45vh', height: 'auto', borderRadius: '20px', display: 'block', margin: '0 auto' }}
-          priorty="true"
+          alt="DealGenie Logo"
+          style={{ 
+            width: '45vh', 
+            height: 'auto', 
+            borderRadius: '20px', 
+            display: 'block', 
+            margin: '0 auto' 
+          }}
+          priority="true"
         />
-        <ol className="list-inside list-decimal text-sm text-center font-[family-name:var(--font-geist-mono)] flex flex-col items-center justify-center">
-          {/* ...existing code... */}
-        </ol>
 
         <div className="flex flex-col items-center justify-center w-full">
           <form className="flex flex-col gap-4 items-center justify-center w-full">
             <input
               type="text"
+              value={username}
               style={{ color: 'black', borderRadius: '12px', width: '320px' }}
               className="rounded border border-solid border-gray-300 p-2 mb-4 text-center"
               placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
             <input
               type="password"
+              value={password}
               style={{ color: 'black', borderRadius: '12px', width: '320px' }}
               className="rounded border border-solid border-gray-300 p-2 mb-4 text-center"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <div className="flex gap-4 justify-center">
               <button
+                type="button"
                 onClick={handleLogin}
                 style={{ color: 'black', borderRadius: '999px', minWidth: '120px' }}
                 className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
               >
-                🙏
-                Login
+                🙏 Login
               </button>
               <button
+                type="button"
                 className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
                 style={{ borderRadius: '999px', minWidth: '120px' }}
                 onClick={handleSignup}
               >
-                👋Signup
+                👋 Signup
               </button>
             </div>
           </form>

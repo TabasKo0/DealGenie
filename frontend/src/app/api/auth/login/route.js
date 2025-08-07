@@ -32,10 +32,11 @@ export  async function POST(request) {
   }
   const headers = new Headers();
   headers.append('Set-Cookie', serialize('token', generateToken(user), {
-      httpOnly: false,
+      httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 3600,
       path: '/',
+      sameSite: 'strict'
   }));
 
 

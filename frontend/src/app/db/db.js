@@ -1,6 +1,8 @@
-const Database =require( 'better-sqlite3');
+const Database = require('better-sqlite3');
 
-const db = new Database('users.db', { verbose: console.log });
+const db = new Database('users.db', { 
+  verbose: process.env.NODE_ENV === 'development' ? console.log : null 
+});
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
