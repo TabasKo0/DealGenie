@@ -1,0 +1,43 @@
+{
+  "name": "gambling",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start -p 3003",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
+    "@mozilla/readability": "^0.5.0",
+    "axios": "^1.7.9",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.8.1",
+    "cheerio": "^1.0.0",
+    "child_process": "^1.0.2",
+    "cookie": "^1.0.2",
+    "embla-carousel-react": "^8.5.2",
+    "framer-motion": "^12.0.6",
+    "fs": "^0.0.1-security",
+    "jose": "^5.9.6",
+    "js-cookie": "^3.0.5",
+    "jsdom": "^26.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "net": "^1.0.2",
+    "next": "15.1.6",
+    "next-auth": "^5.0.0-beta.25",
+    "ogl": "^1.0.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.1",
+    "react-slick": "^0.30.3",
+    "react-spinners": "^0.15.0",
+    "tls": "^0.0.1",
+    "xhr": "^2.6.0"
+  },
+  "devDependencies": {
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}
