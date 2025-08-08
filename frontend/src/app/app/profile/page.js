@@ -44,7 +44,6 @@ const ProfilePage = () => {
             <h1 className="highlights" style={{color: 'white'}}> Profile Page</h1>
             
           <br></br>
-            <img src="/profile.jpg" alt="Banner" className='banner' />
             <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
             <div style={{color: 'black',fontSize: 'X-large'}}>      
                 
@@ -52,11 +51,14 @@ const ProfilePage = () => {
                 <div><span>&nbsp;Balance:</span><span> Rs {user.balance}</span></div>
             </div>
             <div style={{ marginTop: '20px', fontSize: 'large',backgroundColor: 'rgba(218, 255, 221, 0.92)', padding: '5px', borderRadius: '5px' }}>
-            <CartPage username={user.username} />
+             <div style={{backgroundColor: 'rgba(241, 241, 241, 0.92)', padding: '10px', borderRadius: '5px' }}>
+                <CartPage username={user.username} /></div>
+                </div>
            
             </div>
-            <div style={{ marginTop: '20px', fontSize: 'x-large',backgroundColor: 'rgba(218, 255, 221, 0.92)', padding: '10px', borderRadius: '5px' }}>
+            <div style={{ marginTop: '20px', fontSize: 'x-large',backgroundColor: 'rgba(218, 255, 221, 0.92)', padding: '8px', borderRadius: '5px' }}>
               <b>  <h2 >Transactions</h2></b>
+              <div style={{backgroundColor: 'rgba(241, 241, 241, 0.92)', padding: '10px', borderRadius: '5px' }}>
                 {transactions.length > 0 ? (
                     <table className='trans'>
                         <thead className='header'>
@@ -82,7 +84,7 @@ const ProfilePage = () => {
                     </table>
                 ) : (
                     <span>&nbsp; No transactions available.</span>
-                )}
+                )}</div>
             </div>
              <button onClick={async () => {
                
@@ -91,7 +93,7 @@ const ProfilePage = () => {
             }} style={{ marginTop: '20px', padding: '10px 20px', fontSize: 'large' ,backgroundColor: 'rgba(255, 142, 142, 0.92)', borderRadius: '5px', cursor: 'pointer', color: 'black', border: 'none' }}>
                 Logout
             </button>
-        </div></div>
+        </div>
     );
 };
 

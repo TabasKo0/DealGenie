@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 const HomePage = () => {
   
-    const [activeIndex, setActiveIndex] = useState(null);
-    const [data, setData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [selectedSport, setSelectedSport] = useState('Cricket');
-    const [casinoMenu, setCasinoMenu] = useState([]);
-    const [casinoLobby, setCasinoLobby] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedSport, setSelectedSport] = useState('Cricket');
+  const [casinoMenu, setCasinoMenu] = useState([]);
+  const [casinoLobby, setCasinoLobby] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
 useEffect(() => {
   fetch('http://172.16.41.210:8000/analytics')
     .then(response => response.json())
@@ -46,48 +48,52 @@ useEffect(() => {
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
-    const handleLinkClick = (href, imgUrl) => {
+    const handleLinkClick = (href, imgUrl, price) => {
       setActiveLink('/app/' + href);
       setTimeout(() => { setActiveLink(''); }, 100);
-      // Pass img url as query param using string URL
-      router.push(`/app/${href}?img=${encodeURIComponent(imgUrl)}`);
+      // Pass img url and price as query params using string URL
+      router.push(`/app/${href}?img=${encodeURIComponent(imgUrl)}&price=${encodeURIComponent(price)}`);
     };
 
-    useEffect(() => {
-        fetch('https://www.55sport.in/api/exchange/events/searchEventList?key', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ key: '' })
-        })
-            .then(response => response.json())
-            .then(data => {
-                setData(data.data);
-                setFilteredData(data.data.filter(item => item.sportName === 'Cricket'));
-                console.log(data);
-            })
-            .catch(error => console.error('Error fetching data:', error));
-
-
-    }, []);
-
-    const filterData = (sportName) => {
-        setSelectedSport(sportName);
-        setFilteredData(data.filter(item => item.sportName === sportName));
+    // Search submit handler
+    const handleSearchSubmit = async (e) => {
+      e.preventDefault();
+      if (!searchInput.trim()) return;
+      setSearchLoading(true);
+      try {
+        // Call Gemini API with correct model name
+        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyA_mFSLuNJ_AadK6BEAfgU8xEkGWMkjG00", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: [{ parts: [{ text: (searchInput+". based on this previous sentence, recommend products, you may inquire about more specifications ,but keep it brief. do not use any markdown formatting , you may keep bullet points") }] }] })
+        });
+        const result = await response.json();
+        // Pass response to search page via router (use query param or localStorage)
+        router.push(`/app/search?pageResponse=${encodeURIComponent(JSON.stringify(result))}`);
+      } catch (err) {
+        alert("Error fetching Gemini response");
+      }
+      setSearchLoading(false);
     };
 
+ 
     return (
       <div>
-      <img src="/banner.jpg" className='banner' alt="Banner"  />
-
+        {/* Search Bar */}
+        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', marginBottom: 20 ,color:"black"}}>
+          <input
+            type="text"
+            value={searchInput}
+            onChange={e => setSearchInput(e.target.value)}
+            placeholder="what are you looking for?"
+            style={{ flex: 1, padding: 8, borderRadius: 4, border: '1px solid #ccc' }}
+          />
+          <button type="submit" disabled={searchLoading} style={{ marginLeft: 8, padding: '8px 16px', borderRadius: 4, background: '#4caf50', color: '#fff', border: 'none' }}>
+            {searchLoading ? "Searching..." : "Search"}
+          </button>
+        </form>
       <div className='hidden'>
         <br></br>
-        <div className='p-1 submenu'>
-        <span onClick={() => filterData('Cricket')} className={selectedSport === 'Cricket' ? 'active' : ''}>Cricket</span>
-        <span onClick={() => filterData('Soccer')} className={selectedSport === 'Soccer' ? 'active' : ''}>Soccer</span>
-        <span onClick={() => filterData('Tennis')} className={selectedSport === 'Tennis' ? 'active' : ''}>Tennis</span>
-        </div>
         <table className='bgs'>
         <tbody>
         <tr>
@@ -102,12 +108,16 @@ useEffect(() => {
         </table>
       </div>
       <br></br>
-      <div className='casinos'>
+      <div>
         <div className='highlights'>Phones</div>
         <div className='tiles'>
         {casinoLobby.filter(item => item.menuName.toLowerCase() === 'phone').map((item, index) => (
-          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url, item.price)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+            <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} />
+            <span>{item.eventName}</span>
+            <div style={{ fontWeight: 600, color: '#1976d2', marginTop: 8 }}>
+              {item.price ? `₹${item.price}` : 'Price not available'}
+            </div>
           </div>
         ))}
         </div>
@@ -118,8 +128,12 @@ useEffect(() => {
         <div className='highlights'>Headphones</div>
         <div className='tiles'>
         {casinoLobby.filter(item => item.menuName.toLowerCase() === 'headphones').map((item, index) => (
-          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/> <span>{item.eventName}</span>
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url, item.price)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+            <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} />
+            <span>{item.eventName}</span>
+            <div style={{ fontWeight: 600, color: '#1976d2', marginTop: 8 }}>
+              {item.price ? `₹${item.price}` : 'Price not available'}
+            </div>
           </div>
         ))}
         </div>
@@ -130,8 +144,12 @@ useEffect(() => {
         <div className='highlights'>Laptops</div>
         <div className='tiles'>
         {casinoLobby.filter(item => item.menuName.toLowerCase() === 'laptop').map((item, index) => (
-          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url, item.price)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+            <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} />
+            <span>{item.eventName}</span>
+            <div style={{ fontWeight: 600, color: '#1976d2', marginTop: 8 }}>
+              {item.price ? `₹${item.price}` : 'Price not available'}
+            </div>
           </div>
         ))}
         </div>
@@ -142,8 +160,12 @@ useEffect(() => {
         <div className='highlights'>Speakers</div>
         <div className='tiles'>
         {casinoLobby.filter(item => item.menuName.toLowerCase() === 'speakers').map((item, index) => (
-          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url, item.price)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+            <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} />
+            <span>{item.eventName}</span>
+            <div style={{ fontWeight: 600, color: '#1976d2', marginTop: 8 }}>
+              {item.price ? `₹${item.price}` : 'Price not available'}
+            </div>
           </div>
         ))}
         </div>
@@ -154,8 +176,12 @@ useEffect(() => {
         <div className='highlights'>Smart Watches</div>
         <div className='tiles'>
         {casinoLobby.filter(item => item.menuName.toLowerCase() === 'smart watches').map((item, index) => (
-          <div key={index} onClick={() => handleLinkClick(item.link, item.url)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
-          <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} /> <span>{item.eventName}</span>
+          <div key={index} onClick={() => handleLinkClick(item.link, item.url, item.price)} className={`tile ${item.link=='/notworking/home'?'disabled':''}`}>
+            <img src={item.url} style={{ width: '100%', height: '30vh', objectFit: 'cover' }} />
+            <span>{item.eventName}</span>
+            <div style={{ fontWeight: 600, color: '#1976d2', marginTop: 8 }}>
+              {item.price ? `₹${item.price}` : 'Price not available'}
+            </div>
           </div>
         ))}
         </div>

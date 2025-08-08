@@ -4,9 +4,9 @@ import { addToCart } from '../../../db/cartDb';
 export async function POST(req) {
   try {
     const { username, item } = await req.json();
-console.log('Received data:', { username, item });
+console.log('Received data:', { username, item ,price});
   
-    addToCart(username, item);
+    addToCart(username, item,price);
 
     return NextResponse.json({ success: true });
   } catch (err) {

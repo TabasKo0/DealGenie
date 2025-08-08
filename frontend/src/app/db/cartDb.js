@@ -4,11 +4,11 @@ function getCart(username) {
   return db.prepare(`SELECT * FROM carts WHERE username = ?`).all(username);
 }
 
-function addToCart(username, item) {
+function addToCart(username, item,price) {
   db.prepare(`
     INSERT INTO carts (username, product_id, name, price)
     VALUES (?, ?, ?, ?)
-  `).run(username, item, '0',0);
+  `).run(username, item, '0',price);
 }
 
 function removeFromCart(username, productId) {
