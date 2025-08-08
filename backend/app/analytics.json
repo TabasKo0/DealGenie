@@ -1,0 +1,22 @@
+{
+  "ab_test_events": [
+    {
+      "timestamp": "2025-08-08T04:32:44.540142",
+      "user_id": "test123",
+      "test_name": "pricing_strategy",
+      "variant": "control",
+      "event_type": "price_view",
+      "value": 8591.97
+    },
+    {
+      "timestamp": "2025-08-08T04:39:52.529012",
+      "user_id": "demo_user",
+      "test_name": "pricing_strategy",
+      "variant": "control",
+      "event_type": "price_view",
+      "value": 8591.97
+    }
+  ],
+  "price_changes": [],
+  "revenue_metrics": []
+}
