@@ -1,18 +1,22 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-const username = 'demo'; // Replace with actual auth
-
-export default function CartPage() {
+import axios from 'axios';
+export default function CartPage({ username }) {
   const [cart, setCart] = useState([]);
   const [balance, setBalance] = useState(null);
 
-  async function fetchCart() {
-    const res = await fetch(`/api/cart/get?username=${username}`);
-    const data = await res.json();
-    setCart(data.cart || []);
+async function fetchCart() {
+  try {
+    const response = await axios.post('/api/cart/gett', {
+       username 
+    });
+    setCart(response.data.cart || []);
+  } catch (error) {
+    console.error('Error fetching cart:', error);
+    setCart([]);
   }
-
+}
   async function fetchBalance() {
     const res = await fetch(`/api/get_balance?username=${username}`);
     const data = await res.json();

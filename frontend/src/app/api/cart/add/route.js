@@ -2,11 +2,15 @@ import { NextResponse } from 'next/server';
 import { addToCart } from '../../../db/cartDb';
 
 export async function POST(req) {
-  const { username, item } = await req.json();
-  if (!username || !item) {
-    return NextResponse.json({ error: 'Missing data' }, { status: 400 });
-  }
+  try {
+    const { username, item } = await req.json();
+console.log('Received data:', { username, item });
+  
+    addToCart(username, item);
 
-  addToCart(username, item);
-  return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+  }
 }

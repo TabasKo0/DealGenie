@@ -1,4 +1,4 @@
-const db = require('./db');
+const db = require('./db1');
 
 function getCart(username) {
   return db.prepare(`SELECT * FROM carts WHERE username = ?`).all(username);
@@ -8,7 +8,7 @@ function addToCart(username, item) {
   db.prepare(`
     INSERT INTO carts (username, product_id, name, price)
     VALUES (?, ?, ?, ?)
-  `).run(username, item.product_id, item.name, item.price);
+  `).run(username, item, '0',0);
 }
 
 function removeFromCart(username, productId) {

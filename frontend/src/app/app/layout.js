@@ -67,6 +67,16 @@ export default function RootLayout({ children }) {
                                 <li className={`ver-menu ${activeLink === '/app/cricket' ? 'active' : ''}`} onClick={() => handleLinkClick('/app/ch')}>
                                     <a className="navbar-item hover:underline">Headphones</a>
                                 </li>
+                                <li className={`ver-menu ${activeLink === '/app/cricket' ? 'active' : ''}`} onClick={() => handleLinkClick('/app/ch')}>
+                                    <a className="navbar-item hover:underline">laptops</a>
+                                </li>
+                                <li className={`ver-menu ${activeLink === '/app/cricket' ? 'active' : ''}`} onClick={() => handleLinkClick('/app/ch')}>
+                                    <a className="navbar-item hover:underline">speakers</a>
+                                </li>
+                                <li className={`ver-menu ${activeLink === '/app/cricket' ? 'active' : ''}`} onClick={() => handleLinkClick('/app/ch')}>
+                                    <a className="navbar-item hover:underline">smart watches</a>
+                                </li>
+
                                
                                
                                 <li className={`last ver-menu ${activeLink === '/app/profile' ? 'active' : ''}`} >

@@ -43,6 +43,7 @@ export default function Home() {
     const data = await res.json();
     toast.dismiss()
     if (data.message=='Login successful'){
+       localStorage.setItem('user', JSON.stringify(username));
       toast.success('Login successful');
       window.location.href = '/app/home'
     }
