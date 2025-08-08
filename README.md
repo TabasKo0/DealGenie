@@ -63,18 +63,18 @@ Our proprietary **Multi-Factor Dynamic Pricing Algorithm™** processes over 15 
 │                   DealGenie Frontend                        │
 ├─────────────────────────────────────────────────────────────┤
 │  🎨 Modern E-commerce Interface                             │
-│  ├── Product Category Pages (Phones, Laptops, etc.)       │
+│  ├── Product Category Pages (Phones, Laptops, etc.)         │
 │  ├── Smart Search & Filtering                              │
 │  ├── Dynamic Price Display                                 │
 │  └── User Authentication & Profiles                        │
-│                                                             │
-│  🛒 Shopping Experience                                     │
+│                                                            │
+│  🛒 Shopping Experience                                    │
 │  ├── AI-powered Product Recommendations                    │
 │  ├── Real-time Price Updates                               │
 │  ├── Smart Cart Management                                 │
 │  └── Personalized Pricing (A/B tested)                     │
-│                                                             │
-│  📱 Responsive Design                                       │
+│                                                            │
+│  📱 Responsive Design                                      │
 │  ├── Mobile-first Architecture                             │
 │  ├── Progressive Web App Features                          │
 │  ├── Real-time Notifications                               │
@@ -155,7 +155,6 @@ def calculate_dynamic_price(product_data, user_id=None):
 
 **AI-Powered Prediction Engine:**
 
-- **Historical Pattern Analysis**: 30-day rolling trend analysis
 - **Seasonal Adjustment**: Holiday and event-based demand spikes
 - **Market Correlation**: Cross-product demand relationships
 - **Confidence Scoring**: Prediction accuracy and reliability metrics
@@ -291,44 +290,48 @@ npm start -p 3003
 
 ## 📱 User Interface Screenshots
 
-### 1. AI-Powered Product Recommendations
-![AI Recommendations](https://github.com/user-attachments/assets/f2097915-e953-47a2-b4dc-f11c98a2c75e)
-*Our intelligent recommendation engine provides personalized product suggestions based on user behavior and market trends.*
-
-### 2. Category-Specific Store Pages
-![Phone Store](https://github.com/user-attachments/assets/bb3742c8-0467-4a01-8c53-37753be4ee3c)
-*Optimized category pages with dynamic pricing and smart filtering options.*
-
-### 3. Secure Authentication System
+### 1. Secure Authentication System
 ![Login Interface](https://github.com/user-attachments/assets/50057314-2c79-4e0f-ab0b-1797b686c197)
 *Modern, secure authentication with personalized pricing based on user profiles.*
 
-### 4. Real-time Competitive Pricing
+### 2. AI-Powered Product Recommendations
+![AI Recommendations](https://github.com/user-attachments/assets/f2097915-e953-47a2-b4dc-f11c98a2c75e)
+*Our intelligent recommendation engine provides personalized product suggestions based on user behavior and market trends.*
+
+### 3. Category-Specific Store Pages
+![Phone Store](https://github.com/user-attachments/assets/bb3742c8-0467-4a01-8c53-37753be4ee3c)
+*Optimized category pages with dynamic pricing and smart filtering options.*
+
+### 4. Individual Product Pages
+![Product Detail](https://github.com/user-attachments/assets/5e6eb2fb-dfaa-4b57-b469-5835a8568a98)
+*Detailed product pages with dynamic pricing and competitive analysis.*
+
+### 5. Real-time Competitive Pricing
 ![Competitive Pricing](https://github.com/user-attachments/assets/d905c64e-8a0d-492e-8814-71a82b7d235e)
 *Live comparison with competitor prices ensuring optimal market positioning.*
-
-### 5. Data Ingestion Command Line
-![Data Ingestion](https://github.com/user-attachments/assets/00456fc6-99c1-416a-b368-ab5a1fecf22b)
-*Real-time price data ingestion from multiple sources including competitor APIs.*
 
 ### 6. Administrative Dashboard
 ![Admin Dashboard](https://github.com/user-attachments/assets/c16c3764-9a29-4164-8b3a-89a8b12f203e)
 *Comprehensive admin interface for pricing strategy management and analytics.*
 
-### 7. Extensive Product Database
-![Product Database](https://github.com/user-attachments/assets/51bdff80-6708-46fa-b5ef-8e2546c42bb3)
-*4000+ products with detailed pricing analytics and historical data tracking.*
+### 7. Data Ingestion Command Line
+![Data Ingestion](https://github.com/user-attachments/assets/00456fc6-99c1-416a-b368-ab5a1fecf22b)
+*Real-time price data ingestion from multiple sources including competitor APIs.*
 
-### 8. Product Category Pages
+
+
+### 8. Extensive Product Database
+![Product Database](https://github.com/user-attachments/assets/51bdff80-6708-46fa-b5ef-8e2546c42bb3)
+*4000+ products with detailed pricing analytics*
+
+### 9. Product Category Pages
 ![Laptop Store](https://github.com/user-attachments/assets/c768593f-ccd5-41d2-bb77-dd3adfa8b957)
 ![Headphones Store](https://github.com/user-attachments/assets/fb917e48-cbb3-46cf-bea0-c75757cfe726)
 ![Speakers Store](https://github.com/user-attachments/assets/6e1c33cb-70f7-449a-beea-bfa10008fc0d)
 ![Watches Store](https://github.com/user-attachments/assets/74d91e9f-699c-42c7-8ccb-5a6a242f6991)
 *Category-specific pages with optimized product displays and pricing strategies.*
 
-### 9. Individual Product Pages
-![Product Detail](https://github.com/user-attachments/assets/5e6eb2fb-dfaa-4b57-b469-5835a8568a98)
-*Detailed product pages with dynamic pricing and competitive analysis.*
+
 
 ### 10. User Profile & Cart Management
 ![Profile Page](https://github.com/user-attachments/assets/a5299a54-594c-46be-a487-fe19a8cffa4f)
