@@ -1,4 +1,4 @@
-import db from '../../../db/db';
+import db from '../../../db/db.js';
 import { hashPassword} from '../../../utils/auth';
 
 export async function GET(request) {

@@ -14,7 +14,7 @@ const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchLoading, setSearchLoading] = useState(false);
 useEffect(() => {
-  fetch('http://172.16.41.210:8000/analytics')
+  fetch('http://192.168.124.108:8000/analytics')
     .then(response => response.json())
     .then(data => {
       if (Array.isArray(data.analytics)) {
@@ -23,8 +23,9 @@ useEffect(() => {
           menuName: item.type, // like "phone", "laptop", etc.
           eventName: item.product_name,
           link: '/product/' + item.id, // or another route format
-          url: item.img_url || '/placeholder.jpg', // assuming you add image URLs
-          price: item.our_price || '',
+          url: item.img_url || '/placeholder.jpg', // assuming you add image URLs,
+          price: item.our_price || 'N/A' // assuming you have a price field
+
         }));
         setCasinoLobby(formatted);
       } else {
