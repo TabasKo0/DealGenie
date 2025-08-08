@@ -506,10 +506,12 @@ align-items: flex-start;
   align-items: center;
 }
 .ver-menu{
-  
+  align-content: center;
+  width:3em;
+  height:3em;
   padding: 5px;
   border: 3px outset #1a9e30;
-  background-color: #1a9e30;
+  background-color: #8fdf9c;
 }
 
 .ver-menu.active {

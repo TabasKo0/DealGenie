@@ -6,6 +6,7 @@ export default function Page() {
   const { id } = useParams();
   const searchParams = useSearchParams();
   const imgUrl = searchParams.get('img');
+  const price = searchParams.get('price');
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +36,7 @@ export default function Page() {
   const specifications = Array.isArray(product?.specifications) ? product.specifications : [];
 
   return (
-    <div style={{ color: 'black', padding: '2rem', background: '#fafafa', borderRadius: 16, boxShadow: '0 2px 8px #eee' }}>
+  <div style={{ color: 'black', padding: '2rem', background: '#fafafa', borderRadius: 16, boxShadow: '0 2px 8px #eee' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '2rem' }}>
         {imgUrl && (
           <div style={{ flex: '0 0 auto', marginRight: '2rem', textAlign: 'center', position: 'relative', height: '300px' }}>
@@ -52,6 +53,10 @@ export default function Page() {
           <h1 style={{ fontSize: '2em', fontWeight: 700, marginBottom: '1.5rem', marginTop: 0 }}>
             {product?.name || 'Product Details'}
           </h1>
+          {/* Price above buttons */}
+          <div style={{ fontSize: '1.5em', fontWeight: 600, color: '#1976d2', marginBottom: '1rem' }}>
+            {price ? `Price: ₹${price}` : 'Price not available'}
+          </div>
           <div style={{ display: 'flex', gap: '1rem', alignSelf: 'flex-end' }}>
             <button
               style={{
@@ -111,6 +116,12 @@ export default function Page() {
           ))}
         </tbody>
       </table>
+      {/* Display price below item details */}
+      {price && (
+        <div style={{ marginTop: '2rem', fontSize: '1.5em', fontWeight: 600, color: '#1976d2' }}>
+          Price: ₹{price}
+        </div>
+      )}
     </div>
   );
 }
