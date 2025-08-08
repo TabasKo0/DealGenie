@@ -65,7 +65,7 @@ useEffect(() => {
         const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyA_mFSLuNJ_AadK6BEAfgU8xEkGWMkjG00", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ contents: [{ parts: [{ text: (searchInput+". based on this previous sentence, recommend products, you may inquire about more specifications ,but keep it brief. do not use any markdown formatting , you may keep bullet points") }] }] })
+          body: JSON.stringify({ contents: [{ parts: [{ text: (searchInput+".you are the dealgenie. based on the first sentence, recommend products, you may inquire about more specifications ,but keep it brief. do not use any markdown formatting , you may keep bullet points, also read the first sentance and return one of the following keywords at the end you your reply-phone,headphones,laptop,speakers,smart watches") }] }] })
         });
         const result = await response.json();
         // Pass response to search page via router (use query param or localStorage)

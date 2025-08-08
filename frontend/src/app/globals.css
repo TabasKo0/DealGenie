@@ -43,7 +43,8 @@ background: radial-gradient(circle at center, #8ed75a 0%, #17593a 50%, #6fd846c7
 }
 
 .body {
-  background: radial-gradient(circle at center, #8ed75a 0%, #17593a 50%, #6fd846c7 100%);
+  background-image: url('/background.png');
+  /*background: radial-gradient(circle at center, #8ed75a 0%, #17593a 50%, #d6f1ccc7 100%);*/
   background-size: 100vw;
   background-repeat: no-repeat;
   font-size: larger;
