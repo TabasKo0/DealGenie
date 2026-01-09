@@ -37,7 +37,7 @@ body {
   background-size:100vw;
   background-repeat: no-repeat;
   font-size: larger;
-background: radial-gradient(circle at center, #8ed75a 0%, #17593a 50%, #6fd846c7 100%);  color: var(--foreground);
+background: radial-gradient(circle at center, #ffffff 0%, #ffffff 50%, #ffffffc7 100%);  color: var(--foreground);
  background-position: bottom;
   border-radius: 5px;
 }
@@ -218,7 +218,7 @@ flex-direction: column;
   font: sans-serif;
   padding-left: 5px;
   font-size: x-large;
-  background: #12974b;
+  background: #71b1b9;
   padding: 10px;
 }
 
@@ -260,17 +260,17 @@ main{
 
 .tile {
   min-width: 35vh;
-  box-shadow: -1px 0px 11px 1px #0c7b60;
+  box-shadow: -1px 0px 6px 1px #adabab;
   font-size:medium;
   display: flex;
   color: #260829;
   font-weight: 500;
-  border: 1px solid #ccc;
+  border: 1px solid #dadcea;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
   width:fill;
-  background-color: #ffffff;
+  background-color: #dfebee;
   gap:15px;
   flex-direction: column;
   justify-content: flex-start;
@@ -511,8 +511,8 @@ align-items: flex-start;
   width:3em;
   height:3em;
   padding: 5px;
-  border: 3px outset #1a9e30;
-  background-color: #8fdf9c;
+  border: 3px outset #d1f6ff;
+  background-color: #dadcea;
 }
 
 .ver-menu.active {

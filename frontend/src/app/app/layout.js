@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
     return (
         <div style={{ padding: '20px' }}>
             <header style={{ fontWeight:"bold",display: 'flex', marginBottom: '20px' }}>
-                <img className="logo" src="/logo.png" alt="Logo" style={{ borderRadius:'1vh', marginRight: '10px' }} />
+                <img className="logo" src="/loo.png" alt="Logo" style={{ borderRadius:'1vh', marginRight: '10px' }} />
                 <button style={{borderRadius:'0.5vh'}} className="hamburger-menu" onClick={toggleMenu}>
                     <span className="hamburger-icon"></span>
                 </button>
@@ -128,7 +128,7 @@ export default function RootLayout({ children }) {
                 </nav>
             </header>
             <div style={{ display: 'flex', minHeight: '100vh' }}>
-                <div style={{borderRadius:'2vh', boxShadow:" 0 0 20px 3px #d2ffcdff", width: '100%', backgroundColor: '#f0f0f0', padding: '10px' }}>
+                <div style={{borderRadius:'2vh', boxShadow:" 0 0 20px 3px #ffffffff", width: '100%', backgroundColor: '#ffffffff', padding: '10px' }}>
                     <Suspense fallback={<Loading/>}>
                         {children}
                     </Suspense>

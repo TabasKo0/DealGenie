@@ -14,7 +14,7 @@ const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchLoading, setSearchLoading] = useState(false);
 useEffect(() => {
-  fetch('http://192.168.124.108:8000/analytics')
+  fetch('http://127.0.0.1:8000/analytics')
     .then(response => response.json())
     .then(data => {
       if (Array.isArray(data.analytics)) {
@@ -88,7 +88,7 @@ useEffect(() => {
             placeholder="what are you looking for?"
             style={{ flex: 1, padding: 8, borderRadius: 4, border: '1px solid #ccc' }}
           />
-          <button type="submit" disabled={searchLoading} style={{ marginLeft: 8, padding: '8px 16px', borderRadius: 4, background: '#4caf50', color: '#fff', border: 'none' }}>
+          <button type="submit" disabled={searchLoading} style={{ marginLeft: 8, padding: '8px 16px', borderRadius: 4, background: '#71b1b9', color: '#fff', border: 'none' }}>
             {searchLoading ? "Searching..." : "Search"}
           </button>
         </form>
@@ -108,7 +108,7 @@ useEffect(() => {
         </table>
       </div>
       <br></br>
-      <div>
+      <div >
         <div className='highlights'>Phones</div>
         <div className='tiles'>
         {casinoLobby.filter(item => item.menuName.toLowerCase() === 'phone').map((item, index) => (

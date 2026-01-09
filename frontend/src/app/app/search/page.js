@@ -33,7 +33,7 @@ export default function SearchPage() {
 			setSearchLoading(true);
 			try {
 				// Use the correct Gemini model and your API key
-				const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=", {
+				const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyA_mFSLuNJ_AadK6BEAfgU8xEkGWMkjG00", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ contents: [{ parts: [{ text: (searchInput+".you are the dealgenie. based on the first sentence, recommend products, you may inquire about more specifications ,but keep it brief. do not use any markdown formatting , you may keep bullet points, also read the first sentance and return one of the following keywords at the end you your reply-phone,headphones,laptop,speakers,smart watches") }] }] })
@@ -47,7 +47,7 @@ export default function SearchPage() {
                 console.log(lastWord);
 				// Fetch data from server using lastWord
 				if (lastWord) {
-					const res = await fetch('http://192.168.124.108:8000/analytics');
+					const res = await fetch('http://127.0.0.1:8000/analytics');
 					const data = await res.json();
 					if (Array.isArray(data.analytics)) {
 						// Filter results by lastWord in type or product_name

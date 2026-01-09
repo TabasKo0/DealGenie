@@ -25,7 +25,7 @@ ID_COUNTER_PATH = 'app/id_counter.txt'
 CONFIG_PATH = 'app/config.json'
 AB_TEST_PATH = 'app/ab_tests.json'
 ANALYTICS_PATH = 'app/analytics.json'
-PRICEAPI_TOKEN = "ZEKPINXEAXPSLUPFCDLLQNRPBVWVYPULTOBEUUABFEDOCCCCIMSNWXKNLSZASHUA"
+PRICEAPI_TOKEN = "PBSMISHXBXFQRNGMLQCVJKCSMLIMXEQZVVNEMMUUDBAMNRMAMZOGVZWBDRJAZZHE"
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -302,11 +302,6 @@ def periodic_ingest():
                 print(f"[Periodic Ingest] Error for {pname}: {e}")
         time.sleep(3600)  # every hour
 
-# @app.on_event("startup")
-# def start_periodic_ingest():
-#     import threading
-#     t = threading.Thread(target=periodic_ingest, daemon=True)
-#     t.start()
 
 # --- Models ---
 class ProductIngestRequest(BaseModel):
@@ -341,7 +336,7 @@ def ingest_product(data: ProductIngestRequest):
     payload = {
         "token": PRICEAPI_TOKEN,
         "country": "in",
-        "source": "google_shopping",
+        "source": "amazon",
         "topic": "search_results",
         "key": "term",
         "max_age": "43200",
